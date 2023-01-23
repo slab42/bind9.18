@@ -1,0 +1,19 @@
+services:
+## -----------------------------------
+## Bind - Bind DNS with Webmin
+## -----------------------------------
+  bind:
+    container_name: bind
+    hostname: bind
+    image: slab42/bind9.18
+    dns:
+      - 127.0.0.1
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+      - "10000:10000/tcp"
+    volumes:
+      - /data/bind:/data:rw
+    environment:
+      ROOT_PASSWORD: <your-password>
+    restart: unless-stopped
